@@ -64,6 +64,32 @@ docker run \
 
 *For users upgrading their ToolJet version, we recommend choosing the LTS version over the latest version. The LTS version ensures stability with production bug fixes, security patches, and performance enhancements.*
 
+## compile
+- 编译前准备
+```
+1.安装 Python, 并确保它在系统的 PATH 中可用。
+2. 安装 node-gyp：npm install -g node-gyp
+3. 安装 Visual Studio, 在安装过程中，请务必选择“Desktop development with C++”工作负载，因为这是构建原生 Node.js 模块所必需的
+4. 安装或修复 Python 的 distutils, 
+python -m ensurepip --upgrade
+python -m pip install --upgrade pip setuptools wheel
+5. 最后一招，清理 npm 缓存和删除 node_modules 文件夹后重新安装依赖项可以解决问题：
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+- plugins
+```
+npm install
+```
+
+- server
+```
+npm install
+npm start #启动服务端
+```
+
 ## Tutorials and examples
 
 [Time Tracker Application](https://docs.tooljet.ai/docs/#quickstart-guide)<br>

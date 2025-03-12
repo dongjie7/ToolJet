@@ -52,3 +52,29 @@ services:
       - SERVE_CLIENT=false
       - FORCE_COLOR=1
     command: npm run --prefix server start:dev
+
+  postgrest:
+    container_name: postgrest
+    image: postgrest/postgrest:v12.0.2
+    ports:
+      - "3001:3000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: ${PG_HOST}
+    image: postgres:13
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/data/postgres
+    env_file: .env
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+
+volumes:
+  postgres:
